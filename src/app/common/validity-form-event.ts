@@ -4,6 +4,6 @@ export interface ValidityFormEvent<T> {
 }
 
 export interface SliceDate {
-    startDate: string;
-    endDate: string;
+    startDate: string | Date;
+    endDate: string | Date;
 }

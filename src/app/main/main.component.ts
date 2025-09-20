@@ -1,9 +1,12 @@
-import { Component, ViewChild, ViewContainerRef, Type, inject } from "@angular/core";
+import { Component, ViewChild, ViewContainerRef, inject, signal } from "@angular/core";
 import { ToolbarComponent } from "../common/toolbar/toolbar.component";
-import { ProfileSettingsComponent } from "../profile-settings/profile-settings.component";
-import { QuoteSessionFormComponent } from "../quote-session-form/quote-session-form.component";
 import { ToastsService } from "../common/toast.service";
 import { ToastComponent } from "../common/toast/toast.component";
+import {
+    ComponentType,
+    ModeProfileSettingsView,
+    RegisterNestedComponentService,
+} from "../ui-state/register-nested-component.service";
 
 @Component({
     selector: "top4eu-main",
@@ -13,26 +16,48 @@ import { ToastComponent } from "../common/toast/toast.component";
 })
 export class MainComponent {
     private readonly toastsService = inject(ToastsService);
+    private readonly registerNestedComponentService = inject(RegisterNestedComponentService);
 
     @ViewChild("dynamicContainer", { read: ViewContainerRef, static: true })
-    container!: ViewContainerRef;
+    dynamicContainer!: ViewContainerRef;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private readonly componentMap: Record<string, Type<any>> = {
-        profile: ProfileSettingsComponent,
-        quote: QuoteSessionFormComponent,
-    };
+    private readonly profileSettingsOpenedInStrictMode = signal(false);
 
-    public loadComponent(componentKey: string): void {
-        const componentClass = this.componentMap[componentKey];
-        if (!componentClass) {
-            return;
-        }
-        this.container.clear();
-        this.container.createComponent(componentClass);
-    }
+    @ViewChild("strictProfileSettingsContainer", { read: ViewContainerRef, static: true })
+    strictProfileSettingsContainer!: ViewContainerRef;
 
     public addToast(): void {
         this.toastsService.showWarning("This is a warning toast!");
+    }
+
+    public loadComponent(component: {
+        componentName: ComponentType;
+        mode?: ModeProfileSettingsView;
+    }): void {
+        let container;
+        switch (component.mode) {
+            case ModeProfileSettingsView.SMART:
+                container = this.dynamicContainer;
+                break;
+            case ModeProfileSettingsView.STRICT:
+            default:
+                container = this.strictProfileSettingsContainer;
+                if (this.profileSettingsOpenedInStrictMode()) {
+                    this.registerNestedComponentService.clearContainer(
+                        this.strictProfileSettingsContainer
+                    );
+                } else {
+                    this.registerNestedComponentService.loadComponent(
+                        container,
+                        component.componentName
+                    );
+                }
+                this.switchProfileSettingsView();
+                break;
+        }
+    }
+
+    public switchProfileSettingsView(): void {
+        this.profileSettingsOpenedInStrictMode.set(!this.profileSettingsOpenedInStrictMode());
     }
 }

@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, input, output } from "@angular/core";
 import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { SliceDate, ValidityFormEvent } from "../validity-form-event";
+import { StorageService } from "../storage.service";
 
 @Component({
     selector: "top4eu-date-range-control-input",
@@ -13,9 +14,10 @@ import { SliceDate, ValidityFormEvent } from "../validity-form-event";
 export class DateRangeControlInputComponent {
     private readonly fb = inject(FormBuilder);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly storageService = inject(StorageService);
 
-    public readonly startDateControl = this.fb.control("", Validators.required);
-    public readonly endDateControl = this.fb.control("", Validators.required);
+    public readonly startDateControl = this.fb.control(this.storageService.dateRange?.startDate, Validators.required);
+    public readonly endDateControl = this.fb.control(this.storageService.dateRange?.endDate, Validators.required);
     public readonly dateRangeForm = this.fb.group({
         startDate: this.startDateControl,
         endDate: this.endDateControl,
