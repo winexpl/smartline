@@ -1,0 +1,9 @@
+<h1>{{ label() }}</h1>
+<div>
+  @for (row of rows(); track row.key) {
+    <div>
+      <span>{{ row.key }}</span>
+      <input [value]="row.key" [disabled]="true" />
+    </div>
+  }
+</div>

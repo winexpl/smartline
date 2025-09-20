@@ -4,3 +4,8 @@
     (keyup.enter)="onEnterPressed()"
   />
 </div>
+<div>
+  @for (tag of tags(); track tag) {
+    <top4eu-tag></top4eu-tag>
+  }
+</div>

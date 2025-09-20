@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { ToastComponent } from "./common/toast/toast.component";
+import { SmartLineComponent } from "./common/smart-line/smart-line.component";
 
 @Component({
     selector: "top4eu-root",
-    imports: [RouterOutlet],
+    imports: [ToastComponent, SmartLineComponent],
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
 })
