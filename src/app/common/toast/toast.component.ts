@@ -1,20 +1,35 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ToastsService, Toast } from "../toast.service";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: "top4eu-toast",
+    standalone: true,
+    imports: [CommonModule],
     templateUrl: "./toast.component.html",
     styleUrls: ["./toast.component.scss"],
 })
-export class ToastComponent {
-    message = "";
-    isVisible = false;
+export class ToastComponent implements OnInit, OnDestroy {
+    toasts: Toast[] = [];
+    private subscription!: Subscription;
 
-    showToast(message: string): void {
-        this.message = message;
-        this.isVisible = true;
+    private toastsService = inject(ToastsService);
 
-        setTimeout(() => {
-            this.isVisible = false;
-        }, 3000);
+    ngOnInit(): void {
+        this.subscription = this.toastsService.toasts$.subscribe((toast) => {
+            this.toasts.push(toast);
+            if (toast.duration) {
+                setTimeout(() => this.removeToast(toast.id), toast.duration);
+            }
+        });
+    }
+
+    removeToast(id: number): void {
+        this.toasts = this.toasts.filter((toast) => toast.id !== id);
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }

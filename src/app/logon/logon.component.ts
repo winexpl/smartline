@@ -3,6 +3,7 @@ import { InnControlInputComponent } from "../common/inn-control-input/inn-contro
 import { LOGON_STRINGS } from "./logon.strings";
 import { Router } from "@angular/router";
 import { StorageService } from "../common/storage.service";
+import { ValidityFormEvent } from "../common/validity-form-event";
 
 @Component({
     selector: "top4eu-logon",
@@ -26,8 +27,8 @@ export class LogonComponent {
         }
     }
 
-    public onValidityChanges(form: { isValid: boolean; inn: string }): void {
+    public onValidityChanges(form: ValidityFormEvent<string>): void {
         this.isValid = form.isValid;
-        this.inn = form.inn;
+        this.inn = form.value;
     }
 }

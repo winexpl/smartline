@@ -3,7 +3,7 @@ export interface ValidityFormEvent<T> {
     value: T;
 }
 
-export interface DateRange {
+export interface SliceDate {
     startDate: string;
     endDate: string;
 }

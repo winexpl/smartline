@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, input, output } from "@angular/core";
 import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { DateRange, ValidityFormEvent } from "../validity-form-event";
+import { SliceDate, ValidityFormEvent } from "../validity-form-event";
 
 @Component({
     selector: "top4eu-date-range-control-input",
@@ -22,7 +22,7 @@ export class DateRangeControlInputComponent {
     });
 
     public readonly readonly = input<boolean>(false);
-    public readonly validityChanged = output<ValidityFormEvent<DateRange>>();
+    public readonly validityChanged = output<ValidityFormEvent<SliceDate>>();
 
     constructor() {
         this.dateRangeForm.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
@@ -31,7 +31,7 @@ export class DateRangeControlInputComponent {
                 value: {
                     startDate: this.startDateControl.value!,
                     endDate: this.endDateControl.value!,
-                } as DateRange,
+                } as SliceDate,
             });
         });
     }

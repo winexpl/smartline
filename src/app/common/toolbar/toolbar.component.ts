@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject, output, Output } from "@angular/core";
 import { InnControlInputComponent } from "../inn-control-input/inn-control-input.component";
 import { SmartLineComponent } from "../smart-line/smart-line.component";
 import { TOOLBAR_STRINGS } from "./toolbar.strings";
@@ -17,8 +17,14 @@ export class ToolbarComponent {
     private readonly router = inject(Router);
     private readonly storageService = inject(StorageService);
 
+    public componentSelected = output<string>();
+
     public logout(): void {
         this.storageService.removeInn();
         this.router.navigate(['/logon']);
+    }
+
+    public onSelectComponent(component: string): void {
+        this.componentSelected.emit(component);
     }
 }

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { InnControlInputComponent } from "../common/inn-control-input/inn-control-input.component";
 import { DateRangeControlInputComponent } from "../common/date-range-control-input/date-range-control-input.component";
-import { DateRange, ValidityFormEvent } from '../common/validity-form-event';
+import { SliceDate, ValidityFormEvent } from '../common/validity-form-event';
 import { StorageService } from '../common/storage.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { StorageService } from '../common/storage.service';
   styleUrl: './profile-settings.component.scss'
 })
 export class ProfileSettingsComponent {
-    private dateRange:  ValidityFormEvent<DateRange> | null = null;
+    private dateRange:  ValidityFormEvent<SliceDate> | null = null;
     private inn: ValidityFormEvent<string> | null = null;
     public region: string | null = null;
 
@@ -21,7 +21,7 @@ export class ProfileSettingsComponent {
         this.inn = event;
     }
 
-    public onDateRangeValidityChanged(event: ValidityFormEvent<DateRange>): void {
+    public onDateRangeValidityChanged(event: ValidityFormEvent<SliceDate>): void {
         this.dateRange = event;
     }
 
