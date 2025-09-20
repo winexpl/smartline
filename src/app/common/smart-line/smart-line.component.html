@@ -1,1 +1,6 @@
-<input />
+<div>
+  <input
+    [(value)]="searchString"
+    (keyup.enter)="onEnterPressed()"
+  />
+</div>

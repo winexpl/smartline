@@ -14,30 +14,27 @@ module.exports = tseslint.config(
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
-        {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
-        },
-      ],
       "@angular-eslint/component-selector": [
         "error",
         {
           type: "element",
-          prefix: "app",
+          prefix: "top4eu",
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/explicit-function-return-type": "error",
+      semi: ["error", "always"],
+      "no-extra-semi": "error",
+      "semi-spacing": ["error", { before: false, after: true }],
+
+      "@/semi": ["error", "always"],
     },
   },
   {
     files: ["**/*.html"],
-    extends: [
-      ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
-    ],
+    extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
     rules: {},
   }
 );

@@ -5,15 +5,22 @@
   "semi": true,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "printWidth": 120,
+  "printWidth": 100,
   "endOfLine": "lf",
 
   "overrides": [
     {
       "files": "*.ts",
       "options": {
-        "tabWidth": 4,
-        "parser": "typescript"
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": "*.html, *.js, *.json",
+      "options": {
+        "tabWidth": 2,
+        "singleAttributePerLine": true,
+        "parser": "angular"
       }
     }
   ]
