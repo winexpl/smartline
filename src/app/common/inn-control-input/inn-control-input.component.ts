@@ -4,6 +4,7 @@ import { TextInputComponent } from "../text-input/text-input.component";
 import { INN_CONTROL_INPUT_STRINGS } from "./inn-control-input.strings";
 import { FormBuilder, Validators } from "@angular/forms";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { ValidityFormEvent } from "../validity-form-event";
 
 @Component({
     selector: "top4eu-inn-control-input",
@@ -15,7 +16,7 @@ export class InnControlInputComponent {
     strings = INN_CONTROL_INPUT_STRINGS;
 
     public readonly readonly = input<boolean>(false);
-    public readonly validityChanged = output<{ isValid: boolean, inn: string }>();
+    public readonly validityChanged = output<ValidityFormEvent<string>>();
 
     private readonly storageService = inject(StorageService);
     private readonly fb = inject(FormBuilder);
@@ -30,12 +31,12 @@ export class InnControlInputComponent {
     ]);
 
     constructor() {
-        this.innControl.statusChanges
+        this.innControl.valueChanges
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() =>
                 this.validityChanged.emit({
                     isValid: this.innControl.valid,
-                    inn: this.innControl.value!,
+                    value: this.innControl.value!,
                 })
             );
     }
