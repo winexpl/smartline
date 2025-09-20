@@ -1,6 +1,41 @@
+
+/*
+  Theme for Portal Postavshikov
+  */
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.dev/guide/theming
 @use "@angular/material" as mat;
+
+:root {
+  /* Main colors definitions */
+  --color-main-blue: #264b82;
+  --color-gray-blue: #d4dbe6;
+  --color-pale-blue: #e7eef7;
+  --color-red: #db2b21;
+  --color-black: #1a1a1a;
+  --color-pale-black: #8c8c8c;
+
+  /* Additional colors definitions */
+  --color-green: #0d9b68;
+  --color-sea-dark: #167c85;
+  --color-sea-clear: #48b8c2;
+  --color-orange: #f67319;
+  --color-gray: #7f8792;
+  --color-light-gray: #c9d1df; // grey
+
+  /* My color defenitions */
+  --color-darker-red: hsl(from var(--color-red) h 100% 40%);
+
+  /* Padding defenitions */
+  --input-padding: 8px;
+
+  --default-button-padding: 8px 4px;
+
+  /* Border defenitions */
+  --default-border-width: 1px;
+  --attention-border-width: 2px;
+}
 
 html {
     @include mat.theme(
@@ -23,4 +58,62 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Input style defenitions */
+
+/* Global input style */
+input {
+  border-style: solid;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: var(--input-padding);
+}
+
+/* Text input style */
+input[type="text"] {
+  border-width: var(--default-border-width);
+  border-color: var(--color-gray-blue);
+}
+
+input[type="text"].ng-invalid {
+  border-width: var(--attention-border-width);
+  border-color: var(--color-red);
+}
+
+input:hover,
+input:focus {
+  outline: none;
+}
+
+/* Date input style */
+input[type="date"] {
+  border: none;
+  background-color: var(--color-light-gray);
+
+}
+
+/* Button style defenitions */
+
+button {
+  border-width: var(--attention-border-width);
+  border-style: solid;
+  border-color: var(--color-gray-blue);
+  padding: var(--default-button-padding);
+  background-color: white;
+}
+
+button:hover {
+
+}
+
+button[data-type="attention"] {
+  color: var(--color-pale-blue);
+  background-color: var(--color-red);
+}
+
+button[data-type="attention"]:hover {
+  background-color: var(--color-darker-red);
 }
