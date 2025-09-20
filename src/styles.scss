@@ -1,3 +1,8 @@
+
+/*
+  Theme for Portal Postavshikov
+  */
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.dev/guide/theming
 @use "@angular/material" as mat;
@@ -17,7 +22,19 @@
   --color-sea-clear: #48b8c2;
   --color-orange: #f67319;
   --color-gray: #7f8792;
-  --color-light-gray: #c9d1df; //
+  --color-light-gray: #c9d1df; // grey
+
+  /* My color defenitions */
+  --color-darker-red: hsl(from var(--color-red) h 100% 40%);
+
+  /* Padding defenitions */
+  --input-padding: 8px;
+
+  --default-button-padding: 8px 4px;
+
+  /* Border defenitions */
+  --default-border-width: 1px;
+  --attention-border-width: 2px;
 }
 
 html {
@@ -41,4 +58,69 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Input style defenitions */
+
+/* Global input style */
+input {
+  border-style: solid;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: var(--input-padding);
+}
+
+/* Text input style */
+input[type="text"] {
+  border-width: var(--default-border-width);
+  border-color: var(--color-gray-blue);
+}
+
+input[type="text"].ng-invalid {
+  border-width: var(--attention-border-width);
+  border-color: var(--color-red);
+}
+
+input:hover,
+input:focus {
+  outline: none;
+}
+
+/* Date input style */
+input[type="date"] {
+  border: none;
+  background-color: var(--color-light-gray);
+
+  &::-webkit-calendar-picker-indicator {
+      mask-image:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 24 24' %3E%3Cg%3E%3Cpath d='M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-image: none;
+      background-color: currentColor;
+      mask-type: match-source; 
+    }
+}
+
+/* Button style defenitions */
+
+button {
+  border-width: var(--attention-border-width);
+  border-style: solid;
+  border-color: var(--color-gray-blue);
+  padding: var(--default-button-padding);
+  background-color: white;
+}
+
+button:hover {
+
+}
+
+button[data-type="attention"] {
+  color: var(--color-pale-blue);
+  background-color: var(--color-red);
+}
+
+button[data-type="attention"]:hover {
+  background-color: var(--color-darker-red);
 }
