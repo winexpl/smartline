@@ -1,13 +1,13 @@
-import { Component, inject } from "@angular/core";
-import { InnControlInputComponent } from "../inn-control-input/inn-control-input.component";
+import { Component, inject, output } from "@angular/core";
 import { SmartLineComponent } from "../smart-line/smart-line.component";
 import { TOOLBAR_STRINGS } from "./toolbar.strings";
 import { StorageService } from "../storage.service";
 import { Router } from "@angular/router";
+import { ComponentType, ModeProfileSettingsView } from "../../ui-state/register-nested-component.service";
 
 @Component({
     selector: "top4eu-toolbar",
-    imports: [SmartLineComponent, InnControlInputComponent],
+    imports: [SmartLineComponent],
     templateUrl: "./toolbar.component.html",
     styleUrl: "./toolbar.component.scss",
 })
@@ -17,8 +17,20 @@ export class ToolbarComponent {
     private readonly router = inject(Router);
     private readonly storageService = inject(StorageService);
 
+    public profileSettings(): void {
+        this.componentSelected.emit({
+            componentName: ComponentType.PROFILE_SETTINGS,
+            mode: ModeProfileSettingsView.STRICT,
+        });
+    }
+
+    public readonly componentSelected = output<{
+        componentName: ComponentType;
+        mode?: ModeProfileSettingsView;
+    }>();
+
     public logout(): void {
-        this.storageService.removeInn();
-        this.router.navigate(['/logon']);
+        this.storageService.inn = null;
+        this.router.navigate(["/logon"]);
     }
 }

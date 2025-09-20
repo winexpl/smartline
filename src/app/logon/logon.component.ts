@@ -1,8 +1,10 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { InnControlInputComponent } from "../common/inn-control-input/inn-control-input.component";
 import { LOGON_STRINGS } from "./logon.strings";
 import { Router } from "@angular/router";
 import { StorageService } from "../common/storage.service";
+import { ValidityFormEvent } from "../common/validity-form-event";
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: "top4eu-logon",
@@ -22,12 +24,17 @@ export class LogonComponent {
     public logon(): void {
         if (this.isValid) {
             this.storageService.inn = this.inn;
+            this.storageService.region = "77";
+            this.storageService.dateRange = {
+                startDate: formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+                endDate: formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+            };
             this.router.navigate(["/"]);
         }
     }
 
-    public onValidityChanges(form: { isValid: boolean; inn: string }): void {
+    public onValidityChanges(form: ValidityFormEvent<string>): void {
         this.isValid = form.isValid;
-        this.inn = form.inn;
+        this.inn = form.value;
     }
 }

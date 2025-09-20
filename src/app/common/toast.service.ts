@@ -14,12 +14,21 @@ export class ToastsService {
     public toasts$ = this.toastsSubject.asObservable();
     private nextId = 0;
 
-    showSuccess(message: string, duration = 3000): void {
+    public showSuccess(message: string, duration = 3000): void {
         this.showToast({ type: "success", message, duration });
     }
 
-    showError(message: string, duration = 5000): void {
+    public showError(message: string, duration = 5000): void {
         this.showToast({ type: "error", message, duration });
+    }
+
+    public showWarning(message: string, duration = 4000): void {
+        this.showToast({ type: "warning", message, duration });
+    }
+
+    public clearToasts(): void {
+        this.toastsSubject.complete();
+        this.toastsSubject = new Subject<Toast>();
     }
 
     private showToast(toast: Omit<Toast, "id">): void {
