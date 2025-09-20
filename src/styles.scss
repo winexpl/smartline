@@ -2,6 +2,24 @@
 // For more information: https://material.angular.dev/guide/theming
 @use "@angular/material" as mat;
 
+:root {
+  /* Main colors definitions */
+  --color-main-blue: #264b82;
+  --color-gray-blue: #d4dbe6;
+  --color-pale-blue: #e7eef7;
+  --color-red: #db2b21;
+  --color-black: #1a1a1a;
+  --color-pale-black: #8c8c8c;
+
+  /* Additional colors definitions */
+  --color-green: #0d9b68;
+  --color-sea-dark: #167c85;
+  --color-sea-clear: #48b8c2;
+  --color-orange: #f67319;
+  --color-gray: #7f8792;
+  --color-light-gray: #c9d1df; //
+}
+
 html {
     @include mat.theme(
         (
