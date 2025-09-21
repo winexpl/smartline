@@ -1,9 +1,11 @@
 <div class="smartline-container">
-  <input class="smartline-input"
+  <input
+    class="smartline-input with-search-icon"
     [(ngModel)]="searchString"
     placeholder="Введите запрос"
     (keyup.enter)="onEnterPressed()"
   />
+  <!-- <mat-icon matIcon (click)="onEnterPressed()">search</mat-icon> -->
 </div>
 <div class="tags-container">
   @for (tag of tags(); track tag) {

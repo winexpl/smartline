@@ -1,7 +1,9 @@
 <div class="form">
   <div class="toolbar">
     <h1 class="form-title">{{ label() }}</h1>
-    <button class="button" (click)="cancel()">123123123X</button>
+    <button class="button" (click)="cancel()">
+      <mat-icon matIcon>close</mat-icon>
+    </button>
   </div>
 
   <div>
@@ -9,10 +11,10 @@
       @for (row of rows(); track row.key) {
         <div class="row">
           <span class="row-key">{{ row.key }}</span>
-          <input class="row-value" [value]="row.key" [disabled]="true" />
+          <input class="row-value" [value]="row.value" [disabled]="true" />
         </div>
       } @empty {
-        <span class="no-data-label">Нет данных</span>
+        <span class="no-data-label">Без префиллов</span>
       }
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from "@angular/core";
+import { Component, computed, effect, inject, signal } from "@angular/core";
 import { ToastComponent } from "./common/toast/toast.component";
 import { SmartLineComponent } from "./common/smart-line/smart-line.component";
 import { AssistentService } from "./assistent/assistent.service";
@@ -13,14 +13,14 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 @Component({
     selector: "top4eu-root",
     imports: [
-    ToastComponent,
-    SmartLineComponent,
-    FormComponent,
-    FeedbackPanelComponent,
-    ListComponent,
-    ProfileUpdateLineComponent,
-    MatProgressSpinnerModule
-],
+        ToastComponent,
+        SmartLineComponent,
+        FormComponent,
+        FeedbackPanelComponent,
+        ListComponent,
+        ProfileUpdateLineComponent,
+        MatProgressSpinnerModule,
+    ],
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
 })
@@ -28,6 +28,10 @@ export class AppComponent {
     title = "smartline";
     private assistentService = inject(AssistentService);
     private readonly toastService = inject(ToastsService);
+
+    // const predefinedTags = [
+        
+    // ]
 
     public readonly label = signal<string>("");
     public readonly rows = signal<Row[]>([]);
@@ -38,23 +42,29 @@ export class AppComponent {
     public readonly profileData = signal<{ key: string; value: string }>({ key: "", value: "" });
     public readonly profileSettingsVisible = signal(false);
 
-    public readonly hasPayload = computed(() => this.formVisible() || this.profileSettingsVisible() || this.articlesVisible());
+    public readonly hasPayload = computed(
+        () => this.formVisible() || this.profileSettingsVisible() || this.articlesVisible()
+    );
 
     public readonly loading = signal<boolean>(false);
 
-    public testTags(response: ParseResponse): ParseResponse {
+    constructor() {
+        effect(() => console.log(this.rows()));
+    }
+
+    private testTags(response: ParseResponse): ParseResponse {
         response.action_type = ACTION_TYPE.QUOTE_SESSION; // For testing
         response.tags = ["tag1", "tag2", "111111111111111111111111111111", "1"]; // For testing
         return response;
     }
 
-    public testQuoteNoItems(response: ParseResponse): ParseResponse {
+    private testQuoteNoItems(response: ParseResponse): ParseResponse {
         response.action_type = ACTION_TYPE.QUOTE_SESSION; // For testing
         response.intent = INTENT.ACTION; // For testing
         return response;
     }
 
-    public testQuote(response: ParseResponse): ParseResponse {
+    private testQuote(response: ParseResponse): ParseResponse {
         response.action_type = ACTION_TYPE.QUOTE_SESSION; // For testing
         response.intent = INTENT.ACTION; // For testing
         response.rows = [
@@ -64,7 +74,7 @@ export class AppComponent {
         return response;
     }
 
-    public testProfile(response: ParseResponse): ParseResponse {
+    private testProfile(response: ParseResponse): ParseResponse {
         response.action_type = ACTION_TYPE.PROFILE_UPDATE; // For testing
         response.intent = INTENT.ACTION; // For testing
         if (response.routing) {
@@ -91,9 +101,8 @@ export class AppComponent {
             next: (response) => {
                 console.log("Parsed response:", response);
                 // response = this.testProfile(response);
-                this.formVisible.set(false);
-
                 this.offAll();
+                this.tags.set(response.tags);
                 this.switchByIntent(response);
             },
             error: (error) => {
@@ -104,7 +113,7 @@ export class AppComponent {
             },
             complete: () => {
                 this.loading.set(false);
-            }
+            },
         });
     }
 
@@ -132,10 +141,11 @@ export class AppComponent {
             case INTENT.HELP:
                 return this.openArticles(response);
             case INTENT.UNKNOWN:
-                this.toastService.showError("Не удалось распознать запрос. Попробуйте переформулировать.");
+                this.toastService.showError(
+                    "Не удалось распознать запрос. Попробуйте переформулировать."
+                );
                 return null;
             case INTENT.VIEW:
-                
                 this.articles.set(response.routing?.data || []);
                 this.label.set("Результаты поиска по статьям");
                 this.articlesVisible.set(true);
@@ -162,11 +172,7 @@ export class AppComponent {
                     console.warn("Unknown action type:", response.action_type);
                     this.label.set("");
                 }
-                if (response.rows && response.rows.length > 0) {
-                    this.rows.set(response.rows);
-                } else {
-                    this.rows.set([]);
-                }
+                this.rows.set(response.rows);
                 break;
             case ACTION_TYPE.PROFILE_UPDATE:
                 if (actionLabel) {
@@ -174,7 +180,7 @@ export class AppComponent {
                 } else {
                     console.warn("Unknown action type:", response.action_type);
                     this.label.set("");
-                }                
+                }
                 if (response.routing?.profile_key && response.routing?.profile_value) {
                     this.profileData.set({
                         key: response.routing.profile_key,
@@ -188,7 +194,9 @@ export class AppComponent {
 
             default:
                 this.offAll();
-                this.toastService.showError("Не удалось распознать запрос. Попробуйте переформулировать.");
+                this.toastService.showError(
+                    "Не удалось распознать запрос. Попробуйте переформулировать."
+                );
                 break;
         }
     }

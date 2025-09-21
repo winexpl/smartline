@@ -10,7 +10,9 @@
       @for (article of articles(); track article.title) {
         <div class="row">
           <span class="row-key">{{ article.title }}</span>
-          <span class="row-value">{{ article.url }}</span>
+          <a class="row-value" [href]="article.url" target="_blank" rel="noopener noreferrer">
+            {{ article.url }}
+          </a>
         </div>
       } @empty {
         <span class="no-data-label">Нет данных</span>

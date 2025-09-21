@@ -29,7 +29,7 @@ export class AssistentService {
                 tap((response) => {
                     console.log("Response:", response);
                     if (response.routing?.prefill) {
-                        this.labelByRowKey(response.routing?.prefill);
+                        response.rows = this.labelByRowKey(response.routing?.prefill);
                     }
                 })
             );
