@@ -16,7 +16,6 @@ export interface ParseResponse {
         qty: null;
         budget: null;
     };
-    articles?: Article[];
     routing?: {
         type: string;
         search: string;
@@ -29,6 +28,7 @@ export interface ParseResponse {
         action_type: string;
         profile_key: string;
         profile_value: string;
+        data?: Article[];
         prefill: {
             // автозаполнение
             inn: null;
@@ -41,7 +41,7 @@ export interface ParseResponse {
 export const INTENT = {
     HELP: "HELP",
     ACTION: "ACTION",
-    UNKNOWN: "unknown",
+    UNKNOWN: "UNKNOWN",
     VIEW: "VIEW",
 } as const;
 

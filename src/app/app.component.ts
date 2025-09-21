@@ -8,6 +8,7 @@ import { FeedbackPanelComponent } from "./common/feedback-panel/feedback-panel.c
 import { Article, ListComponent } from "./list/list.component";
 import { ProfileUpdateLineComponent } from "./profile-update-line/profile-update-line.component";
 import { ToastsService } from "./common/toast.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
     selector: "top4eu-root",
@@ -17,7 +18,8 @@ import { ToastsService } from "./common/toast.service";
     FormComponent,
     FeedbackPanelComponent,
     ListComponent,
-    ProfileUpdateLineComponent
+    ProfileUpdateLineComponent,
+    MatProgressSpinnerModule
 ],
     templateUrl: "./app.component.html",
     styleUrl: "./app.component.scss",
@@ -75,19 +77,20 @@ export class AppComponent {
     private testArticles(response: ParseResponse): ParseResponse {
         response.action_type = ACTION_TYPE.OTHER; // For testing
         response.intent = INTENT.VIEW; // For testing
-        response.articles = [
-            { id: "1", title: "Article 1", url: "https://example.com/article1" },
-            { id: "2", title: "Article 2", url: "https://example.com/article2" },
-        ]; // For testing
+        // response.routing?.data = [
+        //     { id: "1", title: "Article 1", url: "https://example.com/article1" },
+        //     { id: "2", title: "Article 2", url: "https://example.com/article2" },
+        // ]; // For testing
         return response;
     }
 
     public onEnterPressed(input: string): void {
         console.log("Enter pressed with input:", input);
+        this.loading.set(true);
         this.assistentService.parse(input).subscribe({
             next: (response) => {
                 console.log("Parsed response:", response);
-                response = this.testProfile(response);
+                // response = this.testProfile(response);
                 this.formVisible.set(false);
 
                 this.offAll();
@@ -99,6 +102,9 @@ export class AppComponent {
                 this.offAll();
                 this.switchByIntent(error);
             },
+            complete: () => {
+                this.loading.set(false);
+            }
         });
     }
 
@@ -129,11 +135,12 @@ export class AppComponent {
                 this.toastService.showError("Не удалось распознать запрос. Попробуйте переформулировать.");
                 return null;
             case INTENT.VIEW:
-                this.switchByActionType(response);
-                this.articles.set(response.articles || []);
+                
+                this.articles.set(response.routing?.data || []);
                 this.label.set("Результаты поиска по статьям");
                 this.articlesVisible.set(true);
-                return this.switchByActionType(response);
+                this.switchByActionType(response);
+                return null;
             default:
                 return null;
         }
@@ -180,14 +187,16 @@ export class AppComponent {
                 break;
 
             default:
+                this.offAll();
+                this.toastService.showError("Не удалось распознать запрос. Попробуйте переформулировать.");
                 break;
         }
     }
 
     private openArticles(response: ParseResponse): void {
         this.label.set("Результаты поиска по статьям");
-        if (response.articles && response.articles.length > 0) {
-            this.articles.set(response.articles);
+        if (response.routing?.data && response.routing?.data.length > 0) {
+            this.articles.set(response.routing?.data);
         }
         this.articlesVisible.set(true);
     }
