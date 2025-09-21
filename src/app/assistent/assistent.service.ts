@@ -9,8 +9,8 @@ import { Row } from "../form/form.component";
 })
 export class AssistentService {
     private readonly httpClient = inject(HttpClient);
-    private readonly baseUrl = "https://6eef-afll-tfs2.gw-1a.dockhost.net/api/v1/assistant";
-    // private readonly baseUrl = "/api/v1/assistant";
+    // private readonly baseUrl = "https://6eef-afll-tfs2.gw-1a.dockhost.net/api/v1/assistant";
+    private readonly baseUrl = "http://127.0.0.1:8000/api/v1/assistant";
 
     constructor() {}
 
