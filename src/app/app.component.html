@@ -1,2 +1,38 @@
-<top4eu-smart-line></top4eu-smart-line>
+<div class="app-container">
+  <top4eu-smart-line
+    class="smartline-container"
+    [class.on-the-top]="hasPayload()"
+    (enterPressed)="onEnterPressed($event)"
+    [tags]="tags()"
+  ></top4eu-smart-line>
+  @if (formVisible()) {
+    <div
+      style="height: 100%; display: flex; align-items: center; justify-content: center; width: 100%"
+    >
+      <top4eu-form class="form-container" (canceled)="offAll()" [rows]="rows()" [label]="label()"></top4eu-form>
+    </div>
+  }
+  @if (articlesVisible()) {
+    <div
+      style="height: 100%; display: flex; align-items: center; justify-content: center; width: 100%"
+    >
+      <top4eu-list class="form-container" (canceled)="offAll()" [articles]="articles()" [label]="label()"></top4eu-list>
+    </div>
+  }
+  @if (profileSettingsVisible()) {
+    <div
+      style="height: 100%; display: flex; align-items: center; justify-content: center; width: 100%"
+    >
+      <top4eu-profile-update-line
+      (canceled)="offAll()"
+        [profileData]="profileData()"
+        class="form-container"
+      ></top4eu-profile-update-line>
+    </div>
+  }
+  @if (hasPayload()) {
+    <top4eu-feedback-panel style=""></top4eu-feedback-panel>
+  }
+</div>
+
 <top4eu-toast class="toast-container"></top4eu-toast>

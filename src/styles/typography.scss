@@ -1,0 +1,164 @@
+@import "./variables.scss";
+
+// Mixins for typography styles
+@mixin font-style(
+  $font-family,
+  $font-weight,
+  $font-size,
+  $line-height,
+  $letter-spacing: null,
+  $text-transform: null
+) {
+  font-family: $font-family;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: $line-height;
+
+  @if $letter-spacing {
+    letter-spacing: $letter-spacing;
+  }
+
+  @if $text-transform {
+    text-transform: $text-transform;
+  }
+}
+
+// Typography mixins
+@mixin open-sans-bold-40-30 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-40,
+    $line-height-bold-40
+  );
+}
+
+@mixin open-sans-bold-24-33 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-24,
+    $line-height-bold-24
+  );
+}
+
+@mixin open-sans-bold-40-52 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-40-large,
+    $line-height-bold-40-large
+  );
+}
+
+@mixin open-sans-semibold-30-40 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-semibold,
+    $font-size-semibold-30,
+    $line-height-semibold-30
+  );
+}
+
+@mixin open-sans-bold-24-32 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-24-medium,
+    $line-height-bold-24-medium
+  );
+}
+
+@mixin open-sans-bold-20-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-20,
+    $line-height-bold-20
+  );
+}
+
+@mixin open-sans-regular-20-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-regular,
+    $font-size-regular-20,
+    $line-height-regular-20
+  );
+}
+
+@mixin open-sans-light-20-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-light,
+    $font-size-light-20,
+    $line-height-light-20
+  );
+}
+
+@mixin open-sans-semibold-uppercase-22-28 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-semibold,
+    $font-size-semibold-uppercase-22,
+    $line-height-semibold-uppercase-22,
+    $letter-spacing-uppercase-22,
+    uppercase
+  );
+}
+
+@mixin open-sans-regular-14-18 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-regular,
+    $font-size-regular-14,
+    $line-height-regular-14
+  );
+}
+
+@mixin open-sans-regular-16-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-regular,
+    $font-size-regular-16,
+    $line-height-regular-16
+  );
+}
+
+@mixin open-sans-regular-18-26 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-regular,
+    $font-size-regular-18,
+    $line-height-regular-18
+  );
+}
+
+@mixin open-sans-semibold-16-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-semibold,
+    $font-size-semibold-16,
+    $line-height-semibold-16
+  );
+}
+
+@mixin open-sans-bold-16-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-bold,
+    $font-size-bold-16,
+    $line-height-bold-16
+  );
+}
+
+@mixin open-sans-semibold-uppercase-18-24 {
+  @include font-style(
+    $font-family-primary,
+    $font-weight-semibold,
+    $font-size-semibold-uppercase-18,
+    $line-height-semibold-uppercase-18,
+    $letter-spacing-uppercase-18,
+    uppercase
+  );
+}

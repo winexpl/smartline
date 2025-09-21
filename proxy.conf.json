@@ -1,0 +1,8 @@
+{
+  "/api/v1/assistant/query/": {
+    "target": "https://6eef-afll-tfs2.gw-1a.dockhost.net",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

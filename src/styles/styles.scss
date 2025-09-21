@@ -1,0 +1,121 @@
+/*
+  Theme for Portal Postavshikov
+*/
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use "@angular/material" as mat;
+@import "./variables.scss";
+@import "./typography.scss";
+
+:root {
+  /* Main colors definitions */
+  --color-main-blue: #{$color-main-blue};
+  --color-gray-blue: #{$color-gray-blue};
+  --color-pale-blue: #{$color-pale-blue};
+  --color-red: #{$color-red};
+  --color-black: #{$color-black};
+  --color-pale-black: #{$color-pale-black};
+
+  /* Additional colors definitions */
+  --color-green: #{$color-green};
+  --color-sea-dark: #{$color-sea-dark};
+  --color-sea-clear: #{$color-sea-clear};
+  --color-orange: #{$color-orange};
+  --color-gray: #{$color-gray};
+  --color-light-gray: #{$color-light-gray};
+}
+
+html {
+  font-family: $font-family-primary;
+  background-color: white;
+  min-width: 100%;
+  min-height: 100%;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: $font-family-primary,
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family-primary;
+}
+
+/* Input styles */
+input {
+  border-style: solid;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: var(--input-padding);
+}
+
+input[type="text"] {
+  border-width: var(--default-border-width);
+  border-color: var(--color-gray-blue);
+}
+
+input[type="text"].ng-invalid {
+  border-width: var(--attention-border-width);
+  border-color: var(--color-red);
+}
+
+input:hover,
+input:focus {
+  outline: none;
+}
+
+/* Date input style */
+input[type="date"] {
+  border: none;
+  background-color: var(--color-light-gray);
+}
+
+/* Button styles */
+
+button {
+  color: var(--color-pale-blue);
+  background-color: var(--color-red);
+  @include open-sans-light-20-24();
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: $color-darker-red;
+  background-color: $color-darker-red;
+}
+
+.button {
+  border-width: var(--attention-border-width);
+  border-style: solid;
+  border-radius: 4px;
+  border-color: $color-red;
+  padding: var(--default-button-padding);
+  background-color: $color-red;
+  display: flex;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+  align-content: center;
+}

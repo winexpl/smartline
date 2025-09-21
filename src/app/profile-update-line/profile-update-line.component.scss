@@ -1,0 +1,50 @@
+@use "../../styles/variables.scss" as variable;
+@use "../../styles/typography.scss" as typography;
+
+.profile-update-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 2px solid variable.$color-pale-blue;
+    border-radius: 8px;
+}
+
+.row-key {
+    display: flex;
+    @include typography.open-sans-light-20-24();
+    width: 30%;
+    box-sizing: border-box;
+    padding-left: 10px;
+    justify-content: flex-end;
+    margin-left: 10px;
+    align-items: center;
+}
+
+.row-value {
+    @include typography.open-sans-light-20-24();
+    width: 70%;
+    box-sizing: border-box;
+    padding-right: 10px;
+    margin-right: 10px;
+    border: 1px solid variable.$color-pale-blue;
+    border-radius: 4px;
+}
+
+.title {
+    @include typography.open-sans-bold-24-32();
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    box-sizing: border-box;
+}

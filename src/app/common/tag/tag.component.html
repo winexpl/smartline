@@ -1,3 +1,4 @@
-<div>
-  <span>{{ tagText() }}</span>
+<div class="tag-container" tabindex="0" role="button" (click)="onTagClicked()">
+  <span class="tag">{{ tagText() }}</span>
+  <mat-icon matIcon class="icon" color="white">search</mat-icon>
 </div>

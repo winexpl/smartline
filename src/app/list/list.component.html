@@ -1,15 +1,16 @@
 <div class="form">
   <div class="toolbar">
     <h1 class="form-title">{{ label() }}</h1>
-    <button class="button" (click)="cancel()">123123123X</button>
+    <button class="button" (click)="cancel()">
+      <mat-icon matIcon>close</mat-icon>
+    </button>
   </div>
-
   <div>
     <div class="form-payload">
-      @for (row of rows(); track row.key) {
+      @for (article of articles(); track article.title) {
         <div class="row">
-          <span class="row-key">{{ row.key }}</span>
-          <input class="row-value" [value]="row.key" [disabled]="true" />
+          <span class="row-key">{{ article.title }}</span>
+          <span class="row-value">{{ article.url }}</span>
         </div>
       } @empty {
         <span class="no-data-label">Нет данных</span>

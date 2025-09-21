@@ -1,0 +1,9 @@
+<div class="profile-update-container">
+  <h1 class="title">Изменение настроек профиля</h1>
+  <div class="row">
+    <span class="row-key">{{ profileData().key }}</span>
+    <input class="row-value" [value]="profileData().value" />
+    <button class="button" (click)="cancel()">Обновить</button>
+  </div>
+
+</div>

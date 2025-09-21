@@ -1,0 +1,186 @@
+/*
+  Theme for Portal Postavshikov
+  Variables SCSS File
+*/
+
+// =============================================
+// COLOR PALETTE
+// =============================================
+
+// Primary Colors
+$color-main-blue: #264b82 !default;
+$color-gray-blue: #d4dbe6 !default;
+$color-pale-blue: #e7eef7 !default;
+$color-red: #db2b21 !default;
+$color-black: #1a1a1a !default;
+$color-pale-black: #8c8c8c !default;
+
+// Secondary Colors
+$color-green: #0d9b68 !default;
+$color-sea-dark: #167c85 !default;
+$color-sea-clear: #48b8c2 !default;
+$color-orange: #f67319 !default;
+$color-gray: #7f8792 !default;
+$color-light-gray: #c9d1df !default;
+
+// Derived Colors
+$color-darker-red: hsl(from var(--color-red) h 100% 40%) !default;
+$color-lighter-red: lighten($color-red, 10%) !default;
+$color-darker-blue: darken($color-main-blue, 10%) !default;
+$color-lighter-blue: lighten($color-main-blue, 10%) !default;
+
+// Semantic Colors
+$color-primary: $color-main-blue !default;
+$color-secondary: $color-gray-blue !default;
+$color-accent: $color-red !default;
+$color-success: $color-green !default;
+$color-warning: $color-orange !default;
+$color-danger: $color-red !default;
+$color-info: $color-sea-clear !default;
+
+// Background Colors
+$color-background-primary: #ffffff !default;
+$color-background-secondary: $color-pale-blue !default;
+$color-background-tertiary: $color-gray-blue !default;
+
+// Text Colors
+$color-text-primary: $color-black !default;
+$color-text-secondary: $color-pale-black !default;
+$color-text-muted: $color-gray !default;
+$color-text-inverse: #ffffff !default;
+
+// Border Colors
+$color-border-primary: $color-gray-blue !default;
+$color-border-secondary: $color-light-gray !default;
+$color-border-accent: $color-red !default;
+
+// =============================================
+// TYPOGRAPHY
+// =============================================
+
+// Font families
+$font-family-primary: "Open Sans", sans-serif !default;
+
+// Font weights
+$font-weight-light: 300 !default;
+$font-weight-regular: 400 !default;
+$font-weight-semibold: 600 !default; // SemiBold
+$font-weight-bold: 700 !default;
+
+// Font sizes and line heights
+$font-size-bold-40: 40px !default;
+$line-height-bold-40: 30px !default;
+
+$font-size-bold-24: 24px !default;
+$line-height-bold-24: 33px !default;
+
+$font-size-bold-40-large: 40px !default;
+$line-height-bold-40-large: 52px !default;
+
+$font-size-semibold-30: 30px !default;
+$line-height-semibold-30: 40px !default;
+
+$font-size-bold-24-medium: 24px !default;
+$line-height-bold-24-medium: 32px !default;
+
+$font-size-bold-20: 20px !default;
+$line-height-bold-20: 24px !default;
+
+$font-size-regular-20: 20px !default;
+$line-height-regular-20: 24px !default;
+
+$font-size-light-20: 20px !default;
+$line-height-light-20: 24px !default;
+
+$font-size-semibold-uppercase-22: 22px !default;
+$line-height-semibold-uppercase-22: 28px !default;
+$letter-spacing-uppercase-22: 1px !default;
+
+$font-size-regular-14: 14px !default;
+$line-height-regular-14: 18px !default;
+
+$font-size-regular-16: 16px !default;
+$line-height-regular-16: 24px !default;
+
+$font-size-regular-18: 18px !default;
+$line-height-regular-18: 26px !default;
+
+$font-size-semibold-16: 16px !default;
+$line-height-semibold-16: 24px !default;
+
+$font-size-bold-16: 16px !default;
+$line-height-bold-16: 24px !default;
+
+$font-size-semibold-uppercase-18: 18px !default;
+$line-height-semibold-uppercase-18: 24px !default;
+$letter-spacing-uppercase-18: 1px !default;
+
+// =============================================
+// COMPONENT SPECIFIC VARIABLES
+// =============================================
+
+// Input styles остаются без изменений...
+
+// Button styles остаются без изменений...
+
+// =============================================
+// CSS CUSTOM PROPERTIES (for theme switching)
+// =============================================
+
+:root {
+  // Colors остаются без изменений...
+
+  // Typography
+  --font-family-primary: #{$font-family-primary};
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-regular: #{$font-weight-regular};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+
+  --font-size-bold-40: #{$font-size-bold-40};
+  --line-height-bold-40: #{$line-height-bold-40};
+
+  --font-size-bold-24: #{$font-size-bold-24};
+  --line-height-bold-24: #{$line-height-bold-24};
+
+  --font-size-bold-40-large: #{$font-size-bold-40-large};
+  --line-height-bold-40-large: #{$line-height-bold-40-large};
+
+  --font-size-semibold-30: #{$font-size-semibold-30};
+  --line-height-semibold-30: #{$line-height-semibold-30};
+
+  --font-size-bold-24-medium: #{$font-size-bold-24-medium};
+  --line-height-bold-24-medium: #{$line-height-bold-24-medium};
+
+  --font-size-bold-20: #{$font-size-bold-20};
+  --line-height-bold-20: #{$line-height-bold-20};
+
+  --font-size-regular-20: #{$font-size-regular-20};
+  --line-height-regular-20: #{$line-height-regular-20};
+
+  --font-size-light-20: #{$font-size-light-20};
+  --line-height-light-20: #{$line-height-light-20};
+
+  --font-size-semibold-uppercase-22: #{$font-size-semibold-uppercase-22};
+  --line-height-semibold-uppercase-22: #{$line-height-semibold-uppercase-22};
+  --letter-spacing-uppercase-22: #{$letter-spacing-uppercase-22};
+
+  --font-size-regular-14: #{$font-size-regular-14};
+  --line-height-regular-14: #{$line-height-regular-14};
+
+  --font-size-regular-16: #{$font-size-regular-16};
+  --line-height-regular-16: #{$line-height-regular-16};
+
+  --font-size-regular-18: #{$font-size-regular-18};
+  --line-height-regular-18: #{$line-height-regular-18};
+
+  --font-size-semibold-16: #{$font-size-semibold-16};
+  --line-height-semibold-16: #{$line-height-semibold-16};
+
+  --font-size-bold-16: #{$font-size-bold-16};
+  --line-height-bold-16: #{$line-height-bold-16};
+
+  --font-size-semibold-uppercase-18: #{$font-size-semibold-uppercase-18};
+  --line-height-semibold-uppercase-18: #{$line-height-semibold-uppercase-18};
+  --letter-spacing-uppercase-18: #{$letter-spacing-uppercase-18};
+}

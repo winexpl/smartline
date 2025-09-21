@@ -1,11 +1,12 @@
-<div>
-  <input
-    [(value)]="searchString"
+<div class="smartline-container">
+  <input class="smartline-input"
+    [(ngModel)]="searchString"
+    placeholder="Введите запрос"
     (keyup.enter)="onEnterPressed()"
   />
 </div>
-<div>
+<div class="tags-container">
   @for (tag of tags(); track tag) {
-    <top4eu-tag></top4eu-tag>
+    <top4eu-tag [tagText]="tag" (tagClicked)="onTagClicked($event)"></top4eu-tag>
   }
 </div>

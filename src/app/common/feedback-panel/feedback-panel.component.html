@@ -1,0 +1,16 @@
+<div class="feedback-panel">
+  <h3>Оцените ответ сервера</h3>
+  <div class="stars">
+    @for (star of [1, 2, 3, 4, 5]; track star) {
+      <span
+        class="star"
+        [class.filled]="star <= rating"
+        role="button"
+        [tabindex]="star"
+        (click)="setRating(star)"
+      >
+        ★
+      </span>
+    }
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'top4eu-form',
@@ -9,6 +9,12 @@ import { Component, input } from '@angular/core';
 export class FormComponent {
     public readonly label = input.required<string>();
     public readonly rows = input.required<Row[]>();
+
+    public canceled = output<void>();
+
+    public cancel(): void {
+        this.canceled.emit();
+    }
 }
 
 

@@ -5,7 +5,6 @@ import { Subscription } from "rxjs";
 
 @Component({
     selector: "top4eu-toast",
-    standalone: true,
     imports: [CommonModule],
     templateUrl: "./toast.component.html",
     styleUrls: ["./toast.component.scss"],
